@@ -10,9 +10,15 @@ import com.gilsontsc.clinica.api.entity.Medico;
 import com.gilsontsc.clinica.api.entity.Paciente;
 import com.gilsontsc.clinica.api.entity.Procedimento;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ConsultaDTO {
 
