@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +18,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tb_paciente", schema = "clinica")
+@Table(name = "tb_paciente")
 @Builder
 @Data
 @NoArgsConstructor
@@ -32,6 +35,8 @@ public class Paciente {
 	@Column(nullable = false)
 	private String cpf;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="paciente")
 	private List<Consulta> consultas;
 	
 }
