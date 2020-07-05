@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gilsontsc.clinica.api.dto.MedicoDTO;
 import com.gilsontsc.clinica.api.entity.Medico;
 import com.gilsontsc.clinica.api.repository.MedicoRepository;
 
@@ -37,6 +38,26 @@ public class MedicoService {
 	
 	public void deletar(Long id){
 		this.repository.deleteById(id);
+	}
+	
+	public Medico convertDtoToEntity(MedicoDTO dto) {
+		return Medico.builder()
+					 .id(dto.getId())
+					 .nome(dto.getNome())
+					 .cpf(dto.getCpf())
+					 .especialidade(dto.getEspecialidade())
+					 .consultas(dto.getConsultas())
+					 .build();
+	}
+	
+	public MedicoDTO convertEntityToDto(Medico medico) {
+		return MedicoDTO.builder()
+						.id(medico.getId())
+						.nome(medico.getNome())
+						.cpf(medico.getCpf())
+						.especialidade(medico.getEspecialidade())
+						.consultas(medico.getConsultas())
+						.build();
 	}
 	
 }

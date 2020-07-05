@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gilsontsc.clinica.api.dto.ProcedimentoDTO;
 import com.gilsontsc.clinica.api.entity.Procedimento;
 import com.gilsontsc.clinica.api.repository.ProcedimentoRepository;
 
@@ -33,6 +34,24 @@ public class ProcedimentoService {
 	
 	public void deletar(Long id){
 		this.repository.deleteById(id);
+	}
+	
+	public Procedimento convertDtoToEntity(ProcedimentoDTO dto) {
+		return Procedimento.builder()
+						   .id(dto.getId())
+						   .nome(dto.getNome())
+						   .descricao(dto.getDescricao())
+						   .preco(dto.getPreco())
+						   .build();
+	}
+	
+	public ProcedimentoDTO convertEntityToDto(Procedimento procedimento) {
+		return ProcedimentoDTO.builder()
+						      .id(procedimento.getId())
+						      .nome(procedimento.getNome())
+						      .descricao(procedimento.getDescricao())
+						      .preco(procedimento.getPreco())
+						      .build();
 	}
 	
 }
