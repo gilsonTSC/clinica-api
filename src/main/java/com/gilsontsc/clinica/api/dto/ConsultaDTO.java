@@ -6,9 +6,6 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.gilsontsc.clinica.api.entity.Medico;
-import com.gilsontsc.clinica.api.entity.Paciente;
-import com.gilsontsc.clinica.api.entity.Procedimento;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,13 +22,13 @@ public class ConsultaDTO {
 	private Long id;
 	
 	@NotNull(message = "Informe o Médico")
-	private Medico medico;
+	private Long medico;
 	
 	@NotNull(message = "Informe o Paciente")
-	private Paciente paciente;
+	private Long paciente;
 	
 	@NotNull(message = "Informe o procedimento")
-	private Procedimento procedimento;
+	private Long procedimento;
 	
 	@NotNull(message = "Informe a data")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "pt-BR", timezone = "Brazil/East")

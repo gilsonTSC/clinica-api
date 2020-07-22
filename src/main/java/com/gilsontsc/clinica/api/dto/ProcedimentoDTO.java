@@ -5,8 +5,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.gilsontsc.clinica.api.entity.Consulta;
-import com.gilsontsc.clinica.api.entity.Medico;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,9 +20,9 @@ public class ProcedimentoDTO {
 
 	private Long id;
 	
-	private Medico medico;
+	private Long medico;
 	
-	private Consulta consulta;
+	private Long consulta;
 	
 	@NotNull(message = "Informe o nome do procedimento")
 	@Length(min=3, max=50, message="O nome deve conter entre 3 a 50 caracteres")

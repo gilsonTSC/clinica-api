@@ -7,9 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -29,17 +26,14 @@ public class Consulta {
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name="medico_id")
-	private Medico medico;
+	@Column(name = "medico_id")
+	private Long medico;
 	
-	@ManyToOne
-	@JoinColumn(name="paciente_id")
-	private Paciente paciente;
+	@Column(name = "paciente_id")
+	private Long paciente;
 	
-	@OneToOne
-	@JoinColumn(name="consulta")
-	private Procedimento procedimento;
+	@Column(name = "procedimento_id")
+	private Long procedimento;
 	
 	@Column(name = "data_atendimento")
 	private Date dataAtendimento;

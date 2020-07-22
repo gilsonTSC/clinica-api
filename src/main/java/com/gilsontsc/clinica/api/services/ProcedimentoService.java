@@ -42,6 +42,8 @@ public class ProcedimentoService {
 						   .nome(dto.getNome())
 						   .descricao(dto.getDescricao())
 						   .preco(dto.getPreco())
+						   .medico(dto.getMedico())
+						   .consulta(dto.getConsulta())
 						   .build();
 	}
 	
@@ -51,6 +53,8 @@ public class ProcedimentoService {
 						      .nome(procedimento.getNome())
 						      .descricao(procedimento.getDescricao())
 						      .preco(procedimento.getPreco())
+						      .medico(procedimento.getMedico())
+							  .consulta(procedimento.getConsulta())
 						      .build();
 	}
 	
