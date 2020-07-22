@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
+import com.gilsontsc.clinica.api.controller.exception.ObjectNotFoundException;
 import com.gilsontsc.clinica.api.dto.ConsultaDTO;
 import com.gilsontsc.clinica.api.dto.MedicoDTO;
 import com.gilsontsc.clinica.api.dto.ProcedimentoDTO;
+import com.gilsontsc.clinica.api.entity.Consulta;
 import com.gilsontsc.clinica.api.entity.Medico;
+import com.gilsontsc.clinica.api.entity.Procedimento;
 import com.gilsontsc.clinica.api.services.ConsultaService;
 import com.gilsontsc.clinica.api.services.MedicoService;
 import com.gilsontsc.clinica.api.services.ProcedimentoService;
@@ -55,7 +57,8 @@ public class MedicoController {
 				this.medicoService.salvar(this.medicoService.convertDtoToEntity(medicoAtualizado));
 				return Void.TYPE;
 			})
-			.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Médico não encontrado"));
+			.orElseThrow(() -> new ObjectNotFoundException(
+					"Médico não encontrado! Id: " + id + ", Tipo: " + Medico.class.getName()));
 	}
 	
 	@GetMapping
@@ -74,7 +77,8 @@ public class MedicoController {
 				   .map(medico -> {
 					   return this.medicoService.convertEntityToDto(medico);
 				   })
-				   .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Médico não encontrado"));
+				   .orElseThrow(() -> new ObjectNotFoundException(
+							"Médico não encontrado! Id: " + id + ", Tipo: " + Medico.class.getName()));
 	}
 	
 	@DeleteMapping("{id}")
@@ -85,7 +89,8 @@ public class MedicoController {
 				this.medicoService.deletar(medico.getId());
 				return Void.TYPE;
 			})
-			.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Médico não encontrado"));
+			.orElseThrow(() -> new ObjectNotFoundException(
+					"Médico não encontrado! Id: " + id + ", Tipo: " + Medico.class.getName()));
 	}
 	
 	@GetMapping("{id}/especialidades")
@@ -98,7 +103,8 @@ public class MedicoController {
 					   });
 					   return list;
 				   })
-				   .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Especialidades não encontradas"));
+				   .orElseThrow(() -> new ObjectNotFoundException(
+							"Especialidade não encontrada! Id: " + id + ", Tipo: " + Procedimento.class.getName()));
 	}
 	
 	@GetMapping("{id}/consultas")
@@ -111,7 +117,8 @@ public class MedicoController {
 					   });
 					   return list;
 				   })
-				   .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Consultas não encontradas"));
+				   .orElseThrow(() -> new ObjectNotFoundException(
+							"Consulta não encontrada! Id: " + id + ", Tipo: " + Consulta.class.getName()));
 	}
 	
 }
