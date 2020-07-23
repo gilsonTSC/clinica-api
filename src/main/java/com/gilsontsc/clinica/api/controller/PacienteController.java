@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
+import com.gilsontsc.clinica.api.controller.exception.ObjectNotFoundException;
 import com.gilsontsc.clinica.api.dto.ConsultaDTO;
 import com.gilsontsc.clinica.api.dto.PacienteDTO;
 import com.gilsontsc.clinica.api.entity.Paciente;
@@ -58,7 +58,8 @@ public class PacienteController {
 				   .map(paciente -> {
 					   return this.pacienteService.convertEntityToDto(paciente);
 				   })
-				   .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não encontrado"));
+				   .orElseThrow(() -> new ObjectNotFoundException(
+							"Paciente não encontrado! Id: " + id + ", Tipo: " + Paciente.class.getName()));
 	}
 	
 	@DeleteMapping("{id}")
@@ -69,7 +70,8 @@ public class PacienteController {
 				this.pacienteService.deletar(paciente.getId());
 				return Void.TYPE;
 			})
-			.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não encontrado"));
+			.orElseThrow(() -> new ObjectNotFoundException(
+					"Paciente não encontrado! Id: " + id + ", Tipo: " + Paciente.class.getName()));
 	}
 	
 	@GetMapping("{id}/consultas")
@@ -82,7 +84,8 @@ public class PacienteController {
 					   });
 					   return list;
 				   })
-				   .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não encontrado"));
+				   .orElseThrow(() -> new ObjectNotFoundException(
+							"Paciente não encontrado! Id: " + id + ", Tipo: " + Paciente.class.getName()));
 	}
 	
 }

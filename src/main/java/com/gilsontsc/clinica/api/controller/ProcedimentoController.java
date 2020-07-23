@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
+import com.gilsontsc.clinica.api.controller.exception.ObjectNotFoundException;
 import com.gilsontsc.clinica.api.dto.ProcedimentoDTO;
 import com.gilsontsc.clinica.api.entity.Procedimento;
 import com.gilsontsc.clinica.api.services.ProcedimentoService;
@@ -45,7 +45,8 @@ public class ProcedimentoController {
 				this.procedimentoService.salvar(this.procedimentoService.convertDtoToEntity(procedimentoAtualizado));
 				return Void.TYPE;
 			})
-			.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Procedimento não encontrado"));
+			.orElseThrow(() -> new ObjectNotFoundException(
+					"Procedimento não encontrado! Id: " + id + ", Tipo: " + Procedimento.class.getName()));
 	}
 	
 	@GetMapping
@@ -64,7 +65,8 @@ public class ProcedimentoController {
 				   .map(procedimento -> {
 					   return this.procedimentoService.convertEntityToDto(procedimento);
 				   })
-				   .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Procedimento não encontrado"));
+				   .orElseThrow(() -> new ObjectNotFoundException(
+							"Procedimento não encontrado! Id: " + id + ", Tipo: " + Procedimento.class.getName()));
 	}
 	
 	@DeleteMapping("{id}")
@@ -75,7 +77,8 @@ public class ProcedimentoController {
 				this.procedimentoService.deletar(procedimento.getId());
 				return Void.TYPE;
 			})
-			.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Procedimento não encontrado"));
+			.orElseThrow(() -> new ObjectNotFoundException(
+					"Procedimento não encontrado! Id: " + id + ", Tipo: " + Procedimento.class.getName()));
 	}
 	
 }
