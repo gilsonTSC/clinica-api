@@ -6,4 +6,6 @@ import com.gilsontsc.clinica.api.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
 
+	User findByUserName(String userName);
+
 }
