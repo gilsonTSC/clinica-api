@@ -28,6 +28,10 @@ import com.gilsontsc.clinica.api.services.ConsultaService;
 import com.gilsontsc.clinica.api.services.MedicoService;
 import com.gilsontsc.clinica.api.services.ProcedimentoService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(value = "Medico Endpoint", description = "Controler da entidade médico", tags = {"MedicoEndpoint"})
 @RestController
 @RequestMapping(value="/api/medicos")
 public class MedicoController {
@@ -41,6 +45,7 @@ public class MedicoController {
 	@Autowired
 	private ProcedimentoService procedimentoService;
 	
+	@ApiOperation(value = "Salvar o Médico")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public MedicoDTO salvar(@RequestBody @Valid MedicoDTO medico) {
@@ -49,6 +54,7 @@ public class MedicoController {
 		return this.medicoService.convertEntityToDto(m);
 	}
 	
+	@ApiOperation(value = "Atualizar o Médico")
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizar(@PathVariable Long id, @RequestBody @Valid MedicoDTO medicoAtualizado) {
@@ -61,6 +67,7 @@ public class MedicoController {
 					"Médico não encontrado! Id: " + id + ", Tipo: " + Medico.class.getName()));
 	}
 	
+	@ApiOperation(value = "Lista todos os Médicos")
 	@GetMapping
 	public List<MedicoDTO> obterTodos(){
 		List<MedicoDTO> list = new ArrayList<>();
@@ -71,6 +78,7 @@ public class MedicoController {
 		return list;
 	}
 	
+	@ApiOperation(value = "Buscar Médico pelo Id")
 	@GetMapping("{id}")
 	public MedicoDTO buscarPorId(@PathVariable Long id) {
 		return this.medicoService.buscarPorId(id)
@@ -81,6 +89,7 @@ public class MedicoController {
 							"Médico não encontrado! Id: " + id + ", Tipo: " + Medico.class.getName()));
 	}
 	
+	@ApiOperation(value = "Deletar o Médico")
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Long id) {
@@ -93,6 +102,7 @@ public class MedicoController {
 					"Médico não encontrado! Id: " + id + ", Tipo: " + Medico.class.getName()));
 	}
 	
+	@ApiOperation(value = "Lista todos as especialidades do Médico")
 	@GetMapping("{id}/especialidades")
 	public List<ProcedimentoDTO> listTodasEspecialidades(@PathVariable Long id) {
 		List<ProcedimentoDTO> list = new ArrayList<>();
@@ -107,6 +117,7 @@ public class MedicoController {
 							"Especialidade não encontrada! Id: " + id + ", Tipo: " + Procedimento.class.getName()));
 	}
 	
+	@ApiOperation(value = "Lista todas as consultas do Médico")
 	@GetMapping("{id}/consultas")
 	public List<ConsultaDTO> listTodasConsultas(@PathVariable Long id) {
 		List<ConsultaDTO> list = new ArrayList<>();

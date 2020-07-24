@@ -22,6 +22,10 @@ import com.gilsontsc.clinica.api.dto.ProcedimentoDTO;
 import com.gilsontsc.clinica.api.entity.Procedimento;
 import com.gilsontsc.clinica.api.services.ProcedimentoService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(value = "Procedimento Endpoint", description = "Controler da entidade procedimento", tags = {"ProcedimentoEndpoint"})
 @RestController
 @RequestMapping(value="/api/procedimentos")
 public class ProcedimentoController {
@@ -29,6 +33,7 @@ public class ProcedimentoController {
 	@Autowired
 	private ProcedimentoService procedimentoService;
 	
+	@ApiOperation(value = "Salvar o Procedimento")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ProcedimentoDTO salvar(@RequestBody @Valid ProcedimentoDTO procedimento) {
@@ -37,6 +42,7 @@ public class ProcedimentoController {
 		return this.procedimentoService.convertEntityToDto(p);
 	}
 	
+	@ApiOperation(value = "Atualizar o Procedimento")
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizar(@PathVariable Long id, @RequestBody @Valid ProcedimentoDTO procedimentoAtualizado) {
@@ -49,6 +55,7 @@ public class ProcedimentoController {
 					"Procedimento não encontrado! Id: " + id + ", Tipo: " + Procedimento.class.getName()));
 	}
 	
+	@ApiOperation(value = "Lista todos os procedimentos")
 	@GetMapping
 	public List<ProcedimentoDTO> obterTodos(){
 		List<ProcedimentoDTO> list = new ArrayList<>();
@@ -59,6 +66,7 @@ public class ProcedimentoController {
 		return list;
 	}
 	
+	@ApiOperation(value = "Buscar Procedimento por Id")
 	@GetMapping("{id}")
 	public ProcedimentoDTO buscarPorId(@PathVariable Long id) {
 		return this.procedimentoService.buscarPorId(id)
@@ -69,6 +77,7 @@ public class ProcedimentoController {
 							"Procedimento não encontrado! Id: " + id + ", Tipo: " + Procedimento.class.getName()));
 	}
 	
+	@ApiOperation(value = "Deletar o Procedimento")
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Long id) {

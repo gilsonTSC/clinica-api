@@ -23,6 +23,10 @@ import com.gilsontsc.clinica.api.entity.Paciente;
 import com.gilsontsc.clinica.api.services.ConsultaService;
 import com.gilsontsc.clinica.api.services.PacienteService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(value = "Paciente Endpoint", description = "Controler da entidade paciente", tags = {"PacienteEndpoint"})
 @RestController
 @RequestMapping(value="/api/pacientes")
 public class PacienteController {
@@ -33,6 +37,7 @@ public class PacienteController {
 	@Autowired
 	private ConsultaService consultaService;
 	
+	@ApiOperation(value = "Salvar o Paciente")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public PacienteDTO salvar(@RequestBody @Valid PacienteDTO paciente) {
@@ -40,6 +45,7 @@ public class PacienteController {
 		return this.pacienteService.convertEntityToDto(p);
 	}
 	
+	@ApiOperation(value = "Lista todos os Pacientes")
 	@GetMapping
 	public List<PacienteDTO> obterTodos(){
 		List<PacienteDTO> list = new ArrayList<>();
@@ -51,6 +57,7 @@ public class PacienteController {
 		return list;
 	}
 	
+	@ApiOperation(value = "Buscar o Paciente por Id")
 	@GetMapping("{id}")
 	public PacienteDTO buscarPorId(@PathVariable Long id) {
 		return this.pacienteService
@@ -62,6 +69,7 @@ public class PacienteController {
 							"Paciente não encontrado! Id: " + id + ", Tipo: " + Paciente.class.getName()));
 	}
 	
+	@ApiOperation(value = "Deleta o Paciente")
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Long id) {
@@ -74,6 +82,7 @@ public class PacienteController {
 					"Paciente não encontrado! Id: " + id + ", Tipo: " + Paciente.class.getName()));
 	}
 	
+	@ApiOperation(value = "Lista todas as consultas do Paciente")
 	@GetMapping("{id}/consultas")
 	public List<ConsultaDTO> listTodasConsulta(@PathVariable Long id) {
 		List<ConsultaDTO> list = new ArrayList<>();
