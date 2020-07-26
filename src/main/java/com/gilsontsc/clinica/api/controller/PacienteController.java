@@ -38,7 +38,8 @@ public class PacienteController {
 	private ConsultaService consultaService;
 	
 	@ApiOperation(value = "Salvar o Paciente")
-	@PostMapping
+	@PostMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, 
+	 			 consumes = { "application/json", "application/xml", "application/x-yaml" })
 	@ResponseStatus(HttpStatus.CREATED)
 	public PacienteDTO salvar(@RequestBody @Valid PacienteDTO paciente) {
 		Paciente p = this.pacienteService.salvar(this.pacienteService.convertDtoToEntity(paciente));
@@ -46,7 +47,7 @@ public class PacienteController {
 	}
 	
 	@ApiOperation(value = "Lista todos os Pacientes")
-	@GetMapping
+	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
 	public List<PacienteDTO> obterTodos(){
 		List<PacienteDTO> list = new ArrayList<>();
 		this.pacienteService
@@ -58,7 +59,7 @@ public class PacienteController {
 	}
 	
 	@ApiOperation(value = "Buscar o Paciente por Id")
-	@GetMapping("{id}")
+	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public PacienteDTO buscarPorId(@PathVariable Long id) {
 		return this.pacienteService
 				   .buscarPorId(id)
@@ -83,7 +84,7 @@ public class PacienteController {
 	}
 	
 	@ApiOperation(value = "Lista todas as consultas do Paciente")
-	@GetMapping("{id}/consultas")
+	@GetMapping(value = "/{id}/consultas", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public List<ConsultaDTO> listTodasConsulta(@PathVariable Long id) {
 		List<ConsultaDTO> list = new ArrayList<>();
 		return this.pacienteService.buscarPorId(id)

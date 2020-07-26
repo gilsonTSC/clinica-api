@@ -34,7 +34,8 @@ public class ProcedimentoController {
 	private ProcedimentoService procedimentoService;
 	
 	@ApiOperation(value = "Salvar o Procedimento")
-	@PostMapping
+	@PostMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, 
+	 			 consumes = { "application/json", "application/xml", "application/x-yaml" })
 	@ResponseStatus(HttpStatus.CREATED)
 	public ProcedimentoDTO salvar(@RequestBody @Valid ProcedimentoDTO procedimento) {
 		Procedimento p = this.procedimentoService.convertDtoToEntity(procedimento);
@@ -43,7 +44,8 @@ public class ProcedimentoController {
 	}
 	
 	@ApiOperation(value = "Atualizar o Procedimento")
-	@PutMapping("{id}")
+	@PutMapping(value = "{id}", produces = { "application/json", "application/xml", "application/x-yaml" }, 
+								consumes = { "application/json", "application/xml", "application/x-yaml" })
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizar(@PathVariable Long id, @RequestBody @Valid ProcedimentoDTO procedimentoAtualizado) {
 		this.procedimentoService.buscarPorId(id)
@@ -56,7 +58,7 @@ public class ProcedimentoController {
 	}
 	
 	@ApiOperation(value = "Lista todos os procedimentos")
-	@GetMapping
+	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
 	public List<ProcedimentoDTO> obterTodos(){
 		List<ProcedimentoDTO> list = new ArrayList<>();
 		this.procedimentoService.buscarTodos()
@@ -67,7 +69,7 @@ public class ProcedimentoController {
 	}
 	
 	@ApiOperation(value = "Buscar Procedimento por Id")
-	@GetMapping("{id}")
+	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public ProcedimentoDTO buscarPorId(@PathVariable Long id) {
 		return this.procedimentoService.buscarPorId(id)
 				   .map(procedimento -> {

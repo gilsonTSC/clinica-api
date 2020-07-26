@@ -46,7 +46,8 @@ public class MedicoController {
 	private ProcedimentoService procedimentoService;
 	
 	@ApiOperation(value = "Salvar o Médico")
-	@PostMapping
+	@PostMapping(produces = { "application/json", "application/xml", "application/x-yaml" }, 
+				 consumes = { "application/json", "application/xml", "application/x-yaml" })
 	@ResponseStatus(HttpStatus.CREATED)
 	public MedicoDTO salvar(@RequestBody @Valid MedicoDTO medico) {
 		Medico m = this.medicoService.convertDtoToEntity(medico);
@@ -55,7 +56,8 @@ public class MedicoController {
 	}
 	
 	@ApiOperation(value = "Atualizar o Médico")
-	@PutMapping("{id}")
+	@PutMapping(value = "{id}", produces = { "application/json", "application/xml", "application/x-yaml" }, 
+								consumes = { "application/json", "application/xml", "application/x-yaml" })
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizar(@PathVariable Long id, @RequestBody @Valid MedicoDTO medicoAtualizado) {
 		this.medicoService.buscarPorId(id)
@@ -68,7 +70,7 @@ public class MedicoController {
 	}
 	
 	@ApiOperation(value = "Lista todos os Médicos")
-	@GetMapping
+	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
 	public List<MedicoDTO> obterTodos(){
 		List<MedicoDTO> list = new ArrayList<>();
 		this.medicoService.buscarTodos()
@@ -79,7 +81,7 @@ public class MedicoController {
 	}
 	
 	@ApiOperation(value = "Buscar Médico pelo Id")
-	@GetMapping("{id}")
+	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public MedicoDTO buscarPorId(@PathVariable Long id) {
 		return this.medicoService.buscarPorId(id)
 				   .map(medico -> {
@@ -103,7 +105,7 @@ public class MedicoController {
 	}
 	
 	@ApiOperation(value = "Lista todos as especialidades do Médico")
-	@GetMapping("{id}/especialidades")
+	@GetMapping(value = "/{id}/especialidades", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public List<ProcedimentoDTO> listTodasEspecialidades(@PathVariable Long id) {
 		List<ProcedimentoDTO> list = new ArrayList<>();
 		return this.medicoService.buscarPorId(id)
@@ -118,7 +120,7 @@ public class MedicoController {
 	}
 	
 	@ApiOperation(value = "Lista todas as consultas do Médico")
-	@GetMapping("{id}/consultas")
+	@GetMapping(value = "/{id}/consultas", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public List<ConsultaDTO> listTodasConsultas(@PathVariable Long id) {
 		List<ConsultaDTO> list = new ArrayList<>();
 		return this.medicoService.buscarPorId(id)
