@@ -88,10 +88,10 @@ public class MedicoController {
 	}
 	
 	@ApiOperation(value = "Lista todos os Médicos Paginados")
-	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
+	@GetMapping(value="/page", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public ResponseEntity<Page<MedicoDTO>> obterTodos(@RequestParam(value="page", defaultValue = "0") int page,
-									  @RequestParam(value="limit", defaultValue = "10") int limit,
-									  @RequestParam(value="direction", defaultValue = "asc") String direction) {
+													  @RequestParam(value="limit", defaultValue = "10") int limit,
+													  @RequestParam(value="direction", defaultValue = "asc") String direction) {
 		Direction sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "nome"));
 		

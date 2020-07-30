@@ -76,7 +76,7 @@ public class ProcedimentoController {
 	}
 	
 	@ApiOperation(value = "Lista todos os procedimentos Paginado")
-	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
+	@GetMapping(value="/page", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public ResponseEntity<Page<ProcedimentoDTO>> obterTodos(@RequestParam(value="page", defaultValue = "0") int page,
 														    @RequestParam(value="limit", defaultValue = "10") int limit,
 														    @RequestParam(value="direction", defaultValue = "asc") String direction){
