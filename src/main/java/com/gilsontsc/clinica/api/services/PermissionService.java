@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gilsontsc.clinica.api.dto.PermissionDTO;
 import com.gilsontsc.clinica.api.entity.Permission;
 import com.gilsontsc.clinica.api.repository.PermissionRepository;
 
@@ -24,6 +25,20 @@ public class PermissionService {
 	
 	public void deletar(Long id){
 		this.repository.deleteById(id);
+	}
+	
+	public Permission convertDtoToEntity(PermissionDTO dto) {
+		return Permission.builder()
+					     .id(dto.getId())
+					     .descricao(dto.getDescricao())
+					     .build();
+	}
+	
+	public PermissionDTO convertEntityToDto(Permission permission) {
+		return PermissionDTO.builder()
+							.id(permission.getId())
+						    .descricao(permission.getDescricao())
+						    .build();
 	}
 	
 }
