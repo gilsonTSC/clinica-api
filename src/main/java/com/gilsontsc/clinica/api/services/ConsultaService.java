@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gilsontsc.clinica.api.dto.ConsultaDTO;
 import com.gilsontsc.clinica.api.entity.Consulta;
@@ -18,6 +19,7 @@ public class ConsultaService {
 	@Autowired
 	private ConsultaRepository repository;
 	
+	@Transactional
 	public Consulta salvar(Consulta Consulta) {
 		return this.repository.save(Consulta);
 	}
@@ -34,6 +36,7 @@ public class ConsultaService {
 		return this.repository.findAll(pageable);
 	}
 	
+	@Transactional
 	public void deletar(Long id){
 		this.repository.deleteById(id);
 	}

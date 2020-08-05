@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gilsontsc.clinica.api.dto.PermissionDTO;
 import com.gilsontsc.clinica.api.entity.Permission;
@@ -15,6 +16,7 @@ public class PermissionService {
 	@Autowired
 	private PermissionRepository repository;
 
+	@Transactional
 	public Permission salvar(Permission permission) {
 		return this.repository.save(permission);
 	}
@@ -23,6 +25,7 @@ public class PermissionService {
 		return this.repository.findById(id);
 	}
 	
+	@Transactional
 	public void deletar(Long id){
 		this.repository.deleteById(id);
 	}

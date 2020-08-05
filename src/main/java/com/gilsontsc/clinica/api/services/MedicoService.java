@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gilsontsc.clinica.api.dto.MedicoDTO;
 import com.gilsontsc.clinica.api.entity.Medico;
@@ -18,6 +19,7 @@ public class MedicoService {
 	@Autowired
 	private MedicoRepository repository;
 	
+	@Transactional
 	public Medico salvar(Medico medico) {
 		return this.repository.save(medico);
 	}
@@ -42,6 +44,7 @@ public class MedicoService {
 		return this.repository.findAll(pageable);
 	}
 	
+	@Transactional
 	public void deletar(Long id){
 		this.repository.deleteById(id);
 	}

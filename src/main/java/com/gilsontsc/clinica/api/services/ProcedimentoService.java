@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gilsontsc.clinica.api.dto.ProcedimentoDTO;
 import com.gilsontsc.clinica.api.entity.Procedimento;
@@ -18,6 +19,7 @@ public class ProcedimentoService {
 	@Autowired
 	private ProcedimentoRepository repository;
 	
+	@Transactional
 	public Procedimento salvar(Procedimento procedimento) {
 		return this.repository.save(procedimento);
 	}
@@ -38,6 +40,7 @@ public class ProcedimentoService {
 		return this.repository.findAll(pageable);
 	}
 	
+	@Transactional
 	public void deletar(Long id){
 		this.repository.deleteById(id);
 	}
